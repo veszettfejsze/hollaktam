@@ -1,7 +1,7 @@
 var table;
 
 function preload() {
-  table = loadTable("cimek.csv","csv","header")
+  table = loadTable("ciiiiimek.csv","csv","header")
 }
 function setup() {
   var CX = 1200
@@ -66,17 +66,39 @@ function setup() {
 //    var x = map(long,18.9,19.2,10,1190);
 //    var y = map(lat,47.3,47.6,590,10);
     var x = map(long,longmin,longmax,L_long_x,L_long_y);
-    var y = map(lat,latmin,latmax,L_lat_y,L_lat_x
-               );
+    var y = map(lat,latmin,latmax,L_lat_y,L_lat_x);
     var d = rows[r].getNum("months");
-    var s = map(d,1,50,15,50);
+    var s = map(d,1,50,25,100);
+    var ww = rows[r].getString("withwhom")
     
-    fill(0,0,0);
-    text(street,x,y);
-    text(year,x,y+20);
     //  text(concat(concat(concat(concat(street,' '),x),' '),y),20,60+r*14);
-      
-    fill(0,0,255,20);  
-    ellipse(x,y,s,s)
+    //text(concat(concat(concat(street,' '),ww),' '),20,60+r*14);
+ if (ww == "b") {
+  //  text('*',300,60+r*14);
+    fill(0,0,255,50);  
+    ellipse(x,y,s,s);
+    fill(0,0,0);
+    textSize(15);
+    text(street,x,y);
+    textSize(20);
+    text(year,x,y+20);  
+ } else if (ww == "a"){
+    fill(100,250,100,50)
+    ellipse(x,y,s,s); 
+    fill(0,0,0);
+    textSize(15);
+    text(street,x,y);
+    textSize(20);
+    text(year,x,y+20);  
+  } else {
+    fill(255,0,0,50)
+    ellipse(x,y,s,s); 
+    fill(0,0,0);
+    textSize(15);
+    text(street,x,y);
+    textSize(20);
+    text(year,x,y+20);    
   }
 }
+}
+   
