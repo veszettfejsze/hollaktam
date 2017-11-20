@@ -1,7 +1,7 @@
 var table;
 
 function preload() {
-  table = loadTable("ciiiiimek.csv","csv","header")
+  table = loadTable("cimekv6.csv","csv","header")
 }
 function setup() {
   var CX = 1200
@@ -57,10 +57,13 @@ function setup() {
 //  text(int(L_lat_y),500,60);
 //  text(int(L_long_x),600,40);
 //  text(int(L_long_y),600,60);
+var px = 0;
+var py = 0;
     
   for (var r = 0; r < rows.length; r++) {
     var lat = rows[r].getNum("lat");
     var long = rows[r].getNum("long");
+    var name = rows[r].getString("name");
     var street = rows [r].getString("street");
     var year = rows[r].getString("year");
 //    var x = map(long,18.9,19.2,10,1190);
@@ -73,32 +76,53 @@ function setup() {
     
     //  text(concat(concat(concat(concat(street,' '),x),' '),y),20,60+r*14);
     //text(concat(concat(concat(street,' '),ww),' '),20,60+r*14);
+    noStroke ();
+    
  if (ww == "b") {
   //  text('*',300,60+r*14);
     fill(0,0,255,50);  
     ellipse(x,y,s,s);
     fill(0,0,0);
-    textSize(15);
-    text(street,x,y);
     textSize(20);
+    text(name,x+s/2-5,y);
+    textSize(10);
     text(year,x,y+20);  
  } else if (ww == "a"){
     fill(100,250,100,50)
     ellipse(x,y,s,s); 
     fill(0,0,0);
-    textSize(15);
-    text(street,x,y);
     textSize(20);
-    text(year,x,y+20);  
+    text(name,x+s/2-5,y);
+    textSize(10);
+    text(year,x,y+20);
   } else {
     fill(255,0,0,50)
     ellipse(x,y,s,s); 
     fill(0,0,0);
-    textSize(15);
-    text(street,x,y);
     textSize(20);
-    text(year,x,y+20);    
+    text(name,x+s/2-5,y);
+    textSize(10);
+    text(year,x,y+20);
   }
+ if (r>0) {
+     stroke(200);
+     line(px,py,x,y);
+ }
+ px = x;
+ py = y;
 }
 }
-   
+function arrow(xposition, yposition, size, angle){
+	stroke(200);
+	push();
+	//	needed for rotation
+	translate(xposition,yposition);
+	rotate(angle);
+	translate(-xposition,-yposition);
+	
+	line(xposition + size / 2 - size / 10, yposition - size / 20, xposition + size / 2,yposition);
+	line(xposition - size / 2, yposition, xposition + size / 2, yposition);
+	line(xposition + size / 2 - size / 10, yposition + size / 20, xposition + size / 2,yposition);
+	
+	pop();
+}   
